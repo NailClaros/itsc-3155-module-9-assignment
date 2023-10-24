@@ -3,7 +3,24 @@
 {% block title %}Movie Rating App | All Movies{% endblock %}
 
 {% block body %}
-<h1 class="mb-5">All Movies</h1>
+<h1 class="mb-1">All Movies</h1>
 <p class="mb-3">See our list of movie ratings below</p>
-<!-- TODO: Feature 1 -->
+<ul class="list-group list-group-flush">
+    <div class="d-flex flex-row align-items-center justify-content-between fw-semibold border-bottom mt-4">
+        <p class="col-sm-2">Movie ID</p>
+        <p class="col-sm-2">Title</p>
+        <p class="col-sm-2">Director</p>
+        <p class="col-sm-2">Rating</p>
+    </div>
+</ul>
+<li class="d-flex flex-row align-items-center justify-content-between"
+{%for id, movie in movie_repository.items()%}
+>
+    <div class="col-sm-2" id="{{id}}">{{id}}</div>
+    <div class="col-sm-2" id="{{movie.title}}">{{movie.title}}</div>
+    <div class="col-sm-2" id="{{movie.director}}">{{movie.director}}</div>
+    <div class="col-sm-2" id="{{movie.rating}}">{{movie.rating}}</div>
+{% endfor %}
+</li>
+
 {% endblock %}

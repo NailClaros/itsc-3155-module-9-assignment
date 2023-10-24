@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 # Get the movie repository singleton to use throughout the application
 movie_repository = get_movie_repository()
-
+movie_repository.create_movie("Obamna Soda", "Quentin Tarantino", 5)
 
 @app.get('/')
 def index():
@@ -15,8 +15,7 @@ def index():
 
 @app.get('/movies')
 def list_all_movies():
-    # TODO: Feature 1
-    return render_template('list_all_movies.html', list_movies_active=True)
+    return render_template('list_all_movies.html', movie_repository=movie_repository.get_all_movies())
 
 
 @app.get('/movies/new')
