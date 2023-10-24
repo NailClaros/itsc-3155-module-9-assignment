@@ -35,7 +35,8 @@ def create_movie():
 def search_movies():
     # TODO: Feature 3
     movie_title = request.form.get('movie_title')
-    matched_movies = movie_repository.search_movies_by_title(movie_title)
+    matched_movies = movie_repository.get_movie_by_title(movie_title)
+
 
     if matched_movies:
         return render_template('list_all_movies.html', movies=matched_movies, search_active=True)
