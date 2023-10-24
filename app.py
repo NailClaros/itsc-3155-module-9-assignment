@@ -36,11 +36,16 @@ def search_movies():
     # TODO: Feature 3
     return render_template('search_movies.html', search_active=True)
 
-
 @app.get('/movies/<int:movie_id>')
 def get_single_movie(movie_id: int):
-    # TODO: Feature 4
-    return render_template('get_single_movie.html')
+    movie_title = request.form.get('movie_title')
+    matched_movies = movie_repository.search_movies_by_title(movie_title)
+
+    if matched_movies:
+        return render_template('list_all_movies.html', movies=matched_movies, search_active=True)
+    else:
+        return render_template('search_movies.html', message="No movies found with that title.", search_active=True)
+
 
 
 @app.get('/movies/<int:movie_id>/edit')
