@@ -7,9 +7,6 @@ app = Flask(__name__)
 # Get the movie repository singleton to use throughout the application
 movie_repository = get_movie_repository()
 
-star_wars = movie_repository.create_movie("Star Wars", "George Lucas", 5)
-dune = get_movie_repository().create_movie("Dune", "No Idea", 3)
-avatar = get_movie_repository().create_movie("Avatar", "James Cameron", 100)
 
 @app.get('/')
 def index():
@@ -44,7 +41,6 @@ def search_movies():
 def get_single_movie(movie_id: int):
     # TODO: Feature 4
     movie = get_movie_repository().get_movie_by_id(movie_id)
-    movie = dune
 
     if(movie not in get_movie_repository().get_all_movies()):
         abort(404)
