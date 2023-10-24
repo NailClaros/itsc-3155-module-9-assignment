@@ -3,6 +3,19 @@
 {% block title %}Movie Rating App | Movie{% endblock %}
 
 {% block body %}
-<h1 class="mb-5"></h1>
-<!-- TODO: Feature 4 -->
+<div class="d-flex flex-column justify-content-center align-items-center mt-5">
+    <h1 class="mb-5">{{movie.title}}</h1>
+    <h3 class="mt-5 mb-5">Directed By: {{movie.director}}</h3>
+    <h3 class="mt-5 mb-5">Average Rating: {{movie.rating}} Stars!</h3>
+
+    <form class="d-flex flex-row justify-content-between w-25" action="#" method="post">
+        <button class="btn btn-info rounded-3 w-auto" type="submit" name="edit_movie_button" value="{{movie.id}}">
+            Edit
+        </button>
+        <button class="btn btn-danger rounded-3 w-auto" type="submit" name="delete_movie_button" value="{{movie.id}}">
+            Delete
+        </button>
+    </form>
+</div>
+
 {% endblock %}

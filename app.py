@@ -1,4 +1,4 @@
-from flask import Flask, redirect, render_template
+from flask import Flask, redirect, render_template, url_for, abort
 
 from src.repositories.movie_repository import get_movie_repository
 
@@ -39,7 +39,12 @@ def search_movies():
 @app.get('/movies/<int:movie_id>')
 def get_single_movie(movie_id: int):
     # TODO: Feature 4
-    return render_template('get_single_movie.html')
+    movie = get_movie_repository().get_movie_by_id(movie_id)
+
+    if(movie not in get_movie_repository().get_all_movies()):
+        abort(404)
+    else:
+        return render_template('get_single_movie.html', movie=movie)
 
 
 @app.get('/movies/<int:movie_id>/edit')
