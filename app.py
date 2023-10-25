@@ -1,4 +1,4 @@
-from flask import Flask, redirect, render_template, url_for, abort
+from flask import Flask, redirect, render_template, url_for, abort, request
 
 from src.repositories.movie_repository import get_movie_repository
 
@@ -31,10 +31,17 @@ def create_movie():
     return redirect('/movies')
 
 
-@app.get('/movies/search')
+@app.route('/movies/search', methods=['GET'])
 def search_movies():
     # TODO: Feature 3
-    return render_template('search_movies.html', search_active=True)
+    title = request.args.get('movie_title')
+    
+    if not title:
+        return render_template('search_movies.html')
+    
+    all_movies = movie_repository.get_all_movies()
+    matched_movie = next((movie for movie in all_movies.values() if title.lower() in movie.title.lower()), None)
+
 
 
 @app.get('/movies/<int:movie_id>')
