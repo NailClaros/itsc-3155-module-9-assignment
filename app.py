@@ -31,17 +31,17 @@ def create_movie():
     return redirect('/movies')
 
 
-@app.get('/movies/search')
+@app.route('/movies/search', methods=['POST'])
 def search_movies():
     # TODO: Feature 3
     movie_title = request.form.get('movie_title')
-    matched_movies = movie_repository.get_movie_by_title(movie_title)
+    movie = movie_repository.get_movie_by_title(movie_title)
 
-
-    if matched_movies:
-        return render_template('list_all_movies.html', movies=matched_movies, search_active=True)
+    if movie:
+        return render_template('search_results.html', movie=movie)
     else:
-        return render_template('search_movies.html', message="No movies found with that title.", search_active=True)
+        return render_template('search_movies.html', message="No movie found with that title.", search_active=True)
+
 
 
 @app.get('/movies/<int:movie_id>')
