@@ -39,8 +39,8 @@ def search_movies():
     if not title:
         return render_template('search_movies.html')
     
-    movie = movie_repository.get_movie_by_title(title)
-    return render_template('search_results.html', movie=movie)
+    all_movies = movie_repository.get_all_movies()
+    matched_movie = next((movie for movie in all_movies.values() if title.lower() in movie.title.lower()), None)
 
 
 
