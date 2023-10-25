@@ -31,7 +31,7 @@ def create_movie():
     return redirect('/movies')
 
 
-@app.route('/movies/search', methods=['POST'])
+@app.route('/movies/search', methods=['GET'])
 def search_movies():
     # TODO: Feature 3
     movie_title = request.form.get('movie_title')
