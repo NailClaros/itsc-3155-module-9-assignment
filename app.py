@@ -1,4 +1,4 @@
-from flask import Flask, redirect, render_template, request
+from flask import Flask, redirect, render_template, url_for, abort, request
 
 from src.repositories.movie_repository import get_movie_repository
 
@@ -6,7 +6,8 @@ app = Flask(__name__)
 
 # Get the movie repository singleton to use throughout the application
 movie_repository = get_movie_repository()
-
+movie_repository.create_movie("Obamna Soda", "Quentin Tarantino", 5)
+movie_repository.create_movie("Avatar: The Last Blue Person", "James Madison Cameron", 4)
 
 @app.get('/')
 def index():
@@ -15,8 +16,7 @@ def index():
 
 @app.get('/movies')
 def list_all_movies():
-    # TODO: Feature 1
-    return render_template('list_all_movies.html', list_movies_active=True)
+    return render_template('list_all_movies.html', movie_repository=movie_repository.get_all_movies())
 
 
 @app.get('/movies/new')
@@ -47,7 +47,12 @@ def search_movies():
 @app.get('/movies/<int:movie_id>')
 def get_single_movie(movie_id: int):
     # TODO: Feature 4
-    return render_template('get_single_movie.html')
+    movie = get_movie_repository().get_movie_by_id(movie_id)
+
+    if(movie_id not in movie_repository.get_all_movies().keys()):
+        abort(404)
+    else:
+        return render_template('get_single_movie.html', movie=movie)
 
 
 @app.get('/movies/<int:movie_id>/edit')
