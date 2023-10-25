@@ -34,13 +34,13 @@ def create_movie():
 @app.route('/movies/search', methods=['GET'])
 def search_movies():
     # TODO: Feature 3
-    movie_title = request.form.get('movie_title')
-    movie = movie_repository.get_movie_by_title(movie_title)
-
-    if movie:
-        return render_template('search_results.html', movie=movie)
-    else:
-        return render_template('search_movies.html', message="No movie found with that title.", search_active=True)
+    title = request.args.get('movie_title')
+    
+    if not title:
+        return render_template('search_movies.html')
+    
+    movie = movie_repository.get_movie_by_title(title)
+    return render_template('search_results.html', movie=movie)
 
 
 
