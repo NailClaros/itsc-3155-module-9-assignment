@@ -13,18 +13,13 @@ movie_repository.create_movie("Avatar: The Last Blue Person", "James Madison Cam
 def index():
     return render_template('index.html')
 
-
 @app.get('/movies')
 def list_all_movies():
     return render_template('list_all_movies.html', movie_repository=movie_repository.get_all_movies())
 
-
-@app.get('/movies/new')
 @app.get('/movies/new')
 def create_movies_form():
     return render_template('create_movies_form.html', create_rating_active=True)
-
-
 
 @app.post('/movies')
 def create_movie():
