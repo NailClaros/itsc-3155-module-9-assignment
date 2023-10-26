@@ -1,6 +1,4 @@
 # TODO: Feature 3
-import sys
-sys.path.append('C:\\Users\\adamn\\OneDrive\\Documents\\GitHub\\itsc-3155-module-9-assignment')
 import unittest
 from app import app, movie_repository
 
