@@ -39,10 +39,14 @@ def search_movies():
     
     if not title:
         return render_template('search_movies.html')
-    
+
     all_movies = movie_repository.get_all_movies()
     matched_movie = next((movie for movie in all_movies.values() if title.lower() in movie.title.lower()), None)
 
+    if matched_movie:
+        return render_template('search_results.html', movie=matched_movie)
+    else:
+        return render_template('search_results.html')
 
 
 @app.get('/movies/<int:movie_id>')
