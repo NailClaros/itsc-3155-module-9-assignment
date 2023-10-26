@@ -5,7 +5,7 @@ import unittest
 from app import app, movie_repository
 
 
-class TestSearchMoviesPage(unittest.TestCase):
+class TestSearchMoviesPage(unittest.TestCase):   #https://docs.python.org/3/library/unittest.html
 
     def setUp(self):
         self.client = app.test_client()
