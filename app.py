@@ -27,8 +27,9 @@ def create_movie():
     director = request.form.get('director')
     rating = int(request.form.get('rating'))
     movie_repository.create_movie(title, director, rating) 
+    if title == "" or director == "" or rating == "":
+        abort(400)
     # TODO: Feature 2
-    # After creating the movie in the database, we redirect to the list all movies page
     return redirect('/movies')
 
 
